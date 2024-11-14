@@ -2026,9 +2026,10 @@ const products = [
 
 exports.seedProduct = async () => {
   try {
+    await Product.deleteMany({});
     await Product.insertMany(products);
     console.log("Product seeded successfully");
   } catch (error) {
-    console.log(error);
+    console.error('Error seeding products:', error.message);
   }
 };

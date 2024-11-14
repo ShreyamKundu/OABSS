@@ -1,32 +1,70 @@
-const {seedBrand}=require("./Brand")
-const {seedCategory}=require("./Category")
-const {seedProduct}=require("./Product")
-const {seedUser}=require("./User")
-const {seedAddress}=require("./Address")
-const {seedWishlist}=require("./Wishlist")
-const {seedCart}=require("./Cart")
-const {seedReview}=require("./Review")
-const {seedOrder}=require("./Order")
-const {connectToDB}=require("../database/db")
+const connectToDB = require('../database/db'); // Correct import
+const Brand = require('../models/Brand');
+const Category = require('../models/Category');
+const Product = require('../models/Product');
+const User = require('../models/User');
+const Address = require('../models/Address');
+const Wishlist = require('../models/Wishlist');
+const Cart = require('../models/Cart');
+const Review = require('../models/Review');
+const Order = require('../models/Order');
 
-const seedData=async()=>{
-    try {
-        await connectToDB()
-        console.log('Seed [started] please wait..');
-        await seedBrand()
-        await seedCategory()
-        await seedProduct()
-        await seedUser()
-        await seedAddress()
-        await seedWishlist()
-        await seedCart()
-        await seedReview()
-        await seedOrder()
+// Import seed data
+const brandsData = require('./Brand');
+const categoriesData = require('./Category');
+const productsData = require('./Product');
+const usersData = require('./User');
+const addressesData = require('./Address');
+const wishlistsData = require('./Wishlist');
+const cartsData = require('./Cart');
+const reviewsData = require('./Review');
+const ordersData = require('./Order');
 
-        console.log('Seed completed..');
-    } catch (error) {
-        console.log(error);
-    }
+async function seedCollection(Model, data) {
+  try {
+    await Model.deleteMany({});
+    console.log(`Cleared existing ${Model.collection.name} data`);
+
+    await Model.insertMany(data, { ordered: false });
+    console.log(`Successfully seeded ${Model.collection.name}`);
+  } catch (error) {
+    console.error(`Error seeding ${Model.collection.name}:`, error.message);
+  }
 }
 
-seedData()
+async function seed() {
+  try {
+    await connectToDB();
+    console.log('Seed [started] please wait..');
+
+    const collections = [
+      { model: Brand, data: brandsData },
+      { model: Category, data: categoriesData },
+      { model: Product, data: productsData },
+      { model: User, data: usersData },
+      { model: Address, data: addressesData },
+      { model: Wishlist, data: wishlistsData },
+      { model: Cart, data: cartsData },
+      { model: Review, data: reviewsData },
+      { model: Order, data: ordersData }
+    ];
+
+    for (const { model, data } of collections) {
+      await seedCollection(model, data);
+    }
+
+    console.log('Seed completed successfully');
+  } catch (error) {
+    console.error('Seed failed:', error);
+  } finally {
+    // Optionally disconnect after seeding
+    // await mongoose.disconnect();
+  }
+}
+
+// Execute if this file is run directly
+if (require.main === module) {
+  seed();
+}
+
+module.exports = seed;

@@ -23,11 +23,14 @@ const categories = [
   { _id: "65a7e24602e12c44f599443f", name: "lighting" },
 ];
 
-exports.seedCategory = async () => {
+const seedCategory = async () => {
   try {
+    await Category.deleteMany({}); // Clear existing categories
     await Category.insertMany(categories);
-    console.log("Category seeded successfully");
+    console.log('Categories seeded successfully');
   } catch (error) {
-    console.log(error);
+    console.error('Error seeding categories:', error.message);
   }
 };
+
+module.exports = { seedCategory };

@@ -27,11 +27,23 @@ const addresses = [
   },
 ];
 
-exports.seedAddress = async () => {
-  try {
+// exports.seedAddress = async () => {
+//   try {
+//     await Address.insertMany(addresses);
+//     console.log("Address seeded successfully");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+const seedAddress = async () => {
+  try{
+    await Address.deleteMany({});
     await Address.insertMany(addresses);
     console.log("Address seeded successfully");
   } catch (error) {
-    console.log(error);
+    console.error('Error seeding address:', error.message);
   }
 };
+
+module.exports = {seedAddress};

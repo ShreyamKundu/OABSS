@@ -13,7 +13,7 @@ const userRoutes = require("./routes/User");
 const addressRoutes = require('./routes/Address');
 const reviewRoutes = require("./routes/Review");
 const wishlistRoutes = require("./routes/Wishlist");
-const { connectToDB } = require("./database/db");
+const connectToDB  = require("./database/db");
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 // Initialize Google Generative AI client

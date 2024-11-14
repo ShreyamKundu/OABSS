@@ -81,11 +81,14 @@ const brands = [
   { _id: "65a7e20102e12c44f5994427", name: "YIOSI" },
 ];
 
-exports.seedBrand = async () => {
+const seedBrand = async () => {
   try {
+    await Brand.deleteMany({}); // Clear existing brands
     await Brand.insertMany(brands);
-    console.log('Brand seeded successfully');
+    console.log('Brands seeded successfully');
   } catch (error) {
-    console.log(error);
+    console.error('Error seeding brands:', error.message);
   }
 };
+
+module.exports = { seedBrand };
