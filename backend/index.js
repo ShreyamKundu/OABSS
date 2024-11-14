@@ -123,5 +123,5 @@ server.get("/", (req, res) => {
 
 // Start Server
 server.listen(8000, () => {
-  console.log('Server [STARTED] ~ http://localhost:8000');
+  console.log('Server [STARTED] ~ https://oabss.vercel.app/?vercelToolbarCode=0cypGHpFq6bFpuc');
 });
