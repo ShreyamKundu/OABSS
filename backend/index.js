@@ -30,7 +30,7 @@ connectToDB();
 
 // CORS Configuration
 const corsOptions = {
-  origin: "https://oabss-mern.vercel.app", // Allow requests from your frontend
+  origin: "https://oabss-shreyam-kundus-projects.vercel.app", // Allow requests from your frontend
   credentials: true, // Enable cookies/credentials
   methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"], // Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
