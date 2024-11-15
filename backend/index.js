@@ -26,7 +26,19 @@ const server = express();
 connectToDB();
 
 // Middlewares
-server.use(cors({ origin: 'https://oabss-mern.vercel.app', credentials: true, exposedHeaders: ['X-Total-Count'], methods: ['GET', 'POST', 'PATCH', 'DELETE'] }));
+
+// CORS configuration
+const corsOptions = {
+  origin: 'https://oabss-mern.vercel.app', // Allow requests from your frontend
+  credentials: true,
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['X-Total-Count'],
+};
+
+server.use(cors(corsOptions)); // Apply CORS before routes
+
+//server.use(cors({ origin: 'https://oabss-mern.vercel.app', credentials: true, exposedHeaders: ['X-Total-Count'], methods: ['GET', 'POST', 'PATCH', 'DELETE'] }));
 server.use(express.json());
 server.use(cookieParser());
 server.use(morgan("tiny"));
