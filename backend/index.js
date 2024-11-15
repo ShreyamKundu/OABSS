@@ -26,7 +26,7 @@ const server = express();
 connectToDB();
 
 // Middlewares
-server.use(cors({ origin: process.env.ORIGIN, credentials: true, exposedHeaders: ['X-Total-Count'], methods: ['GET', 'POST', 'PATCH', 'DELETE'] }));
+server.use(cors({ origin: 'https://oabss-mern.vercel.app', credentials: true, exposedHeaders: ['X-Total-Count'], methods: ['GET', 'POST', 'PATCH', 'DELETE'] }));
 server.use(express.json());
 server.use(cookieParser());
 server.use(morgan("tiny"));
@@ -123,5 +123,5 @@ server.get("/", (req, res) => {
 
 // Start Server
 server.listen(8000, () => {
-  console.log('Server [STARTED] ~ http://localhost:8000');
+  console.log('Server [STARTED] ~ https://oabss.vercel.app/');
 });
