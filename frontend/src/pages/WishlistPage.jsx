@@ -9,7 +9,7 @@ export const WishlistPage = () => {
     <>
     <Navbar/>
     <Wishlist/>
-    <Chatbox />
+{/*     <Chatbox /> */}
     <Footer/>
     </>
   )
