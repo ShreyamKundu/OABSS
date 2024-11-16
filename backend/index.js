@@ -26,7 +26,6 @@ const server = express();
 // Database connection
 connectToDB();
 
-// Middleware setup
 
 // CORS Configuration
 const corsOptions = {
